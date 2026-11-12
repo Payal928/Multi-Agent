@@ -1,0 +1,21 @@
+services:
+  multi-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: multi-agent-app
+
+    ports:
+      - "5000:5000"
+
+    env_file:
+      - .env
+
+    environment:
+      OTEL_SDK_DISABLED: "true"
+      PYTHONUNBUFFERED: "1"
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+
+    restart: unless-stopped
+
